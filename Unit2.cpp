@@ -1,15 +1,13 @@
-     //---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 
 #include <vcl.h>
 #pragma hdrstop
 
-
 #include "Unit2.h"
-#include "math.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
-
+TForm2 *Form2;
 //---------------------------------------------------------------------------
 __fastcall TForm2::TForm2(TComponent* Owner)
         : TForm(Owner)
@@ -17,16 +15,17 @@ __fastcall TForm2::TForm2(TComponent* Owner)
 }
 //---------------------------------------------------------------------------
 
+
 void __fastcall TForm2::Button1Click(TObject *Sender)
 {
-AnsiString MNOZ[200];
+   AnsiString MNOZ[200];
 int il_nap2=0;
                            int Suma_skl=0;
                   int IL_ZN[200];
             int iteratornaw3=0;
            AnsiString poj_nagid[100][100];
              int sumamnidz[100][100];
-     int poj_na_od[300][100];
+     int poj_na_od[100][100];
      int poj_na_znaki[200];
      int iteratorgp=1;
      int iteratorgd=1;
@@ -59,7 +58,7 @@ int il_nap2=0;
         AnsiString lancuchy[100];
         AnsiString Operacje[100];
         AnsiString wyrazy[100];
-        int POJ_NA_ZN[200];
+        int POJ_NA_ZN[100];
         int pojemnik_na_znaki[100][100];
         AnsiString napisponaw;
         int iterator_znaki=0;
@@ -125,7 +124,7 @@ int il_nap2=0;
         int nawiasy[100];
         int NAWIAS=0;
         AnsiString zla_skladnia;
-        AnsiString LANCUCHYMNOZ[200];
+        AnsiString LANCUCHYMNOZ[100];
         int Wlacz1=0;
         int Wlacz2=0;
         int POZ1[100];
@@ -142,7 +141,7 @@ int il_nap2=0;
 
              }
              }
-             if(iterator_dlugosc<NAPIS.Length())
+             if(iterator_dlugosc<NAPIS.Length()-1)
              {
                if((NAPIS[iterator_dlugosc]==')')&&(NAPIS[iterator_dlugosc+1]=='+'))
              {
@@ -358,7 +357,7 @@ int il_nap2=0;
                    int LanMnozLength=1;
                    int ilNAWmnoz=0;
                    int ilNAWmnoz2=0;
-                   int poj_na_ilnawmnoz[200];
+                   int poj_na_ilnawmnoz[100];
                    int poz1[100][100];
                    int poz2[100][100];
                    if(ilnawMN!=0)
@@ -442,29 +441,29 @@ int il_nap2=0;
 
 
 
-                      Lengthlan++;
+                     Lengthlan++;
                       }
                       while(Lengthlan<lancuchymnoz[ilnawMN2][ilNAWmnoz2].Length());
                       if(Lengthlan==lancuchymnoz[ilnawMN2][ilNAWmnoz2].Length())
                       {
-                          Lengthlan=1;
+                         Lengthlan=1;
 
                       }
                       ilnawMnoz2++;
                     }
                     while(ilnawMnoz2<poj_na_ilnawmnoz[ilnawMN2]);
-                    if(ilnawMnoz2==poj_na_ilnawmnoz[ilnawMN2])
-                    {
+                   if(ilnawMnoz2==poj_na_ilnawmnoz[ilnawMN2])
+                   {
                      ilnawMnoz2=0;
 
-                    }
+                   }
                     ilnawMN2++;
                    }
                    while(ilnawMN2<ilnawMN);
 
-                         }
 
 
+                    }
 
 
 
@@ -537,13 +536,643 @@ int il_nap2=0;
              {
              if(NAWIAS==1)
              {
+              int napislength=1;
+              int poj_na_zn[100];
+              int licz_naw=0;
+              do
+              {
+               if(Edit1->Text[napislength]=='(')
+               {
+                   poj_na_zn[licz_naw]=napislength;
+                   licz_naw++;
+
+               }
+               if(Edit1->Text[napislength]==')')
+               {
+
+                  poj_na_zn[licz_naw]=napislength;
+                   licz_naw++;
+
+               }
+
+
+
+              napislength++;
+              }
+              while(napislength<Edit1->Text.Length());
+              int licz_naw2=0;
+              int CZUJ1=0;
+              int CZUJ2=0;
+              int poz1=0;
+              int poz2=0;
+              int poz3=0;
+              do
+              {
+              if(licz_naw2<licz_naw-1)
+              {
+                 if((Edit1->Text[poj_na_zn[licz_naw2]]=='(')&&(Edit1->Text[poj_na_zn[licz_naw2+1]]=='('))
+                 {
+                    CZUJ1=1;
+                    poz1=poj_na_zn[licz_naw2+1];
+                 }
+                  if((Edit1->Text[poj_na_zn[licz_naw2]]==')')&&(Edit1->Text[poj_na_zn[licz_naw2+1]]==')'))
+                 {
+                   CZUJ2=1;
+                    poz2=poj_na_zn[licz_naw2+1];
+                    poz3=poj_na_zn[licz_naw2+2];
+                 }
+                 }
+                 licz_naw2++;
+
+              }
+              while(licz_naw2<licz_naw);
+              AnsiString LANWEW;
+              AnsiString LAN2;
+              if((CZUJ1==1)&&(CZUJ2==1))
+              {
+                LANWEW=Edit1->Text.SubString(poz1,poz2-poz1);
+                ShowMessage(LANWEW);
+                LAN2=Edit1->Text.SubString(poz3,Edit1->Text.Length()-poz3+1);
+                ShowMessage(LAN2);
+              }
+               int LengthLan2=1;
+               int NAW1=0;
+               int NAW2=0;
+               do
+               {
+               if(LAN2[LengthLan2]=='(')
+               {
+                 NAW1++;
+
+               }
+               if(LAN2[LengthLan2]==')')
+               {
+                 NAW2++;
+
+
+               }
+
+
+
+
+
+
+
+               LengthLan2++;
+               }
+               while(LengthLan2<=LAN2.Length());
+
+               if((NAW1==1)&&(NAW2==1))
+               {
+
+
+
+               }
+               else
+               {
+                int ilosc_naw=0;
+                int iterator_length=1;
+                int poznaw1[100];
+                int poznaw2[100];
+                int ilnaw1=0;
+                int ilnaw2=0;
+
+                do
+                {
+                 if(LAN2[iterator_length]=='(')
+                 {
+                   poznaw1[ilnaw1]=iterator_length;
+                   ilnaw1++;
+
+                 }
+                 if(LAN2[iterator_length]==')')
+                 {
+                     poznaw2[ilnaw2]=iterator_length;
+                     ilnaw2++;
+                 }
+
+
+
+
+                 iterator_length++;
+                }
+                while(iterator_length<=LAN2.Length());
+
+                int ilnaw3=0;
+                AnsiString LAN2WEW[100];
+                do
+                {
+
+                  LAN2WEW[ilnaw3]=LAN2.SubString(poznaw1[ilnaw3]+1,poznaw2[ilnaw3]-poznaw1[ilnaw3]-1);
+
+
+
+                 ilnaw3++;
+                }
+                while(ilnaw3<ilnaw2);
+                ShowMessage(LAN2WEW[0]);
+                ShowMessage(LAN2WEW[1]);
+                ilnaw3=0;
+                int iterator_lan=1;
+                int poj_na_zn_lan_wew[100][100];
+                int LZ=0;
+                int ILZ[100];
+                 do
+                 {
+                   do
+                   {
+                     if(LAN2WEW[ilnaw3][iterator_lan]=='+')
+                     {
+                       poj_na_zn_lan_wew[ilnaw3][LZ]=iterator_lan;
+                       LZ++;
+
+                     }
+                       if(LAN2WEW[ilnaw3][iterator_lan]=='/')
+                     {
+                       poj_na_zn_lan_wew[ilnaw3][LZ]=iterator_lan;
+                       LZ++;
+
+                     }
+                     if(LAN2WEW[ilnaw3][iterator_lan]=='-')
+                     {
+                       poj_na_zn_lan_wew[ilnaw3][LZ]= iterator_lan;
+                       LZ++;
+
+                     }
+                     if(LAN2WEW[ilnaw3][iterator_lan]=='*')
+                     {
+                        poj_na_zn_lan_wew[ilnaw3][LZ]=iterator_lan;
+                        LZ++;
+
+
+                     }
+
+                   iterator_lan++;
+                   }
+                   while(iterator_lan<LAN2WEW[ilnaw3].Length());
+                   if(iterator_lan==LAN2WEW[ilnaw3].Length())
+                   {
+                   ILZ[ilnaw3]=LZ;
+                   LZ=0;
+                     iterator_lan=1;
+
+                   }
+                  ilnaw3++;
+                 }
+                 while(ilnaw3<ilnaw2);
+                 ilnaw3=0;
+                 ShowMessage(ILZ[ilnaw3]);
+                 ShowMessage(ILZ[ilnaw3+1]);
+                 int Liczb_Zn=0;
+                 int sumy_skl[100][100];
+                 int plmin=0;
+                 int ilplmindod[100];
+                 do
+                 {
+                    do
+                    {
+                     if((LAN2WEW[ilnaw3][poj_na_zn_lan_wew[ilnaw3][Liczb_Zn]]=='+')&&(Liczb_Zn==0))
+                     {
+                       sumy_skl[ilnaw3][plmin]=atof(LAN2WEW[ilnaw3].SubString(0,poj_na_zn_lan_wew[ilnaw3][0]-1).c_str());
+                       plmin++;
+                     }
+                     if(((LAN2WEW[ilnaw3][poj_na_zn_lan_wew[ilnaw3][Liczb_Zn]]=='+')&&(Liczb_Zn>0)&&(Liczb_Zn<ILZ[ilnaw3])))
+                     {
+
+                        sumy_skl[ilnaw3][plmin]=atof(LAN2WEW[ilnaw3].SubString(poj_na_zn_lan_wew[ilnaw3][Liczb_Zn-1]+1,poj_na_zn_lan_wew[ilnaw3][Liczb_Zn]-poj_na_zn_lan_wew[ilnaw3][Liczb_Zn-1]-1).c_str());
+                        plmin++;
+                     }
+                     if((LAN2WEW[ilnaw3][poj_na_zn_lan_wew[ilnaw3][Liczb_Zn]]=='+')&&(Liczb_Zn==ILZ[ilnaw3]-1))
+                     {
+                       sumy_skl[ilnaw3][plmin]=atof(LAN2WEW[ilnaw3].SubString(poj_na_zn_lan_wew[ilnaw3][Liczb_Zn]+1,LAN2WEW[ilnaw3].Length()-poj_na_zn_lan_wew[ilnaw3][Liczb_Zn]).c_str());
+                       plmin++;
+
+                     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+                     Liczb_Zn++;
+                    }
+                    while(Liczb_Zn<ILZ[ilnaw3]);
+                    if(Liczb_Zn==ILZ[ilnaw3])
+                    {
+                     ilplmindod[ilnaw3]=plmin;
+                    plmin=0;
+                      Liczb_Zn=0;
+
+
+                    }
+
+
+
+
+
+
+
+
+                  ilnaw3++;
+                 }
+                 while(ilnaw3<ilnaw2);
+                   int ilplmin2=0;
+                    ilnaw3=0;
+                   int SUMA[100];
+                   do
+                   {
+                     do
+                     {
+                       SUMA[ilnaw3]=SUMA[ilnaw3]+sumy_skl[ilnaw3][ilplmin2];
+                       ilplmin2++;
+                     }
+                     while(ilplmin2<ilplmindod[ilnaw3]);
+                     if(ilplmin2==ilplmindod[ilnaw3])
+                     {
+                      ilplmin2=0;
+
+                     }
+                     ilnaw3++;
+                   }
+                   while(ilnaw3<ilnaw2);
+
+                  ShowMessage(SUMA[0]);
+                  ShowMessage(SUMA[1]);
+                  ilnaw3=0;
+                  int SUMAMNOZ=0;
+                  do
+                  {
+                   if(ilnaw3==0)
+                   {
+                     SUMAMNOZ=SUMA[ilnaw3];
+                   }
+                   else
+                   {
+                        SUMAMNOZ=SUMAMNOZ*SUMA[ilnaw3];
+                   }
+
+
+
+                   ilnaw3++;
+                  }
+                  while(ilnaw3<ilnaw2);
+                  ShowMessage(SUMAMNOZ);
+
+
+               int iterator_LAN=1;
+               int Pojem_na_Lan[100];
+               int il_lan=0;
+               do
+               {
+                  if(LANWEW[iterator_LAN]=='(')
+                  {
+                    Pojem_na_Lan[il_lan]=iterator_LAN;
+                    il_lan++;
+                  }
+                  if(LANWEW[iterator_LAN]==')')
+                  {
+                      Pojem_na_Lan[il_lan]=iterator_LAN;
+                      il_lan++;
+
+                  }
+
+
+                iterator_LAN++;
+               }
+               while(iterator_LAN<LANWEW.Length());
+
+               AnsiString LANCWEW=LANWEW.SubString(Pojem_na_Lan[0],Pojem_na_Lan[il_lan-1]-Pojem_na_Lan[0]+1);
+               AnsiString LANKON=LANWEW.SubString(Pojem_na_Lan[il_lan-1]+2,LANWEW.Length()-Pojem_na_Lan[il_lan-1]);
+
+               ShowMessage(LANCWEW);
+               ShowMessage(LANKON);
+
+               int lancwewlength=1;
+               int NAW1[100];
+               int NAW2[100];
+                ilnaw1=0;
+                ilnaw2=0;
+               do
+               {
+                if(LANCWEW[lancwewlength]=='(')
+                {
+                   NAW1[ilnaw1]=lancwewlength;
+                   ilnaw1++;
+                }
+                if(LANCWEW[lancwewlength]==')')
+                {
+                   NAW2[ilnaw2]=lancwewlength;
+                   ilnaw2++;
+                }
+
+
+
+               lancwewlength++;
+               }
+               while(lancwewlength<=LANCWEW.Length());
+               ilnaw3=0;
+               AnsiString LAN[100];
+               do
+               {
+
+                LAN[ilnaw3]=LANCWEW.SubString(NAW1[ilnaw3],NAW2[ilnaw3]-NAW1[ilnaw3]);
+
+
+
+                ilnaw3++;
+               }
+               while(ilnaw3<ilnaw2);
+                int Lengthlan=1;
+                ilnaw3=0;
+                int poj_na_zn[100][100];
+               int LZN=0;
+                int ILLZN[100];
+                do
+                {
+                  do
+                  {
+                    if(LAN[ilnaw3][Lengthlan]=='+')
+                    {
+                        poj_na_zn[ilnaw3][LZN]=Lengthlan;
+                        LZN++;
+                    }
+                    if(LAN[ilnaw3][Lengthlan]=='-')
+                    {
+                        poj_na_zn[ilnaw3][LZN]=Lengthlan;
+                        LZN++;
+
+                    }
+                    if(LAN[ilnaw3][Lengthlan]=='*')
+                    {
+                        poj_na_zn[ilnaw3][LZN]=Lengthlan;
+                        LZN++;
+
+                    }
+                    if(LAN[ilnaw3][Lengthlan]=='/')
+                    {
+                        poj_na_zn[ilnaw3][LZN]=Lengthlan;
+                        LZN++;
+
+                    }
+
+
+                   Lengthlan++;
+                  }
+                  while(Lengthlan<LAN[ilnaw3].Length());
+                  if(Lengthlan==LAN[ilnaw3].Length())
+                  {
+                  ILLZN[ilnaw3]=LZN;
+                  LZN=0;
+                    Lengthlan=1;
+
+                  }
+                  ilnaw3++;
+                }
+                while(ilnaw3<ilnaw2);
+                int LZN2=0;
+                ilnaw3=0;
+                int SKLLAN[100][100];
+                int PLMIN=0;
+                int ILPLMIN[100];
+                int DODP[100];
+                do
+                {
+                  do
+                  {
+                  if(ILLZN[ilnaw3]==1)
+                  {
+                    DODP[ilnaw3]=atoi(LAN[ilnaw3].SubString(2,poj_na_zn[ilnaw3][LZN2]-1).c_str());
+                    ShowMessage(LAN[ilnaw3].SubString(2,poj_na_zn[ilnaw3][LZN2]));
+                    ShowMessage("LOLOK");
+                  }
+                    if((LAN[ilnaw3][poj_na_zn[ilnaw3][LZN2]]=='+')&&(LZN2==0)&&(ILLZN[ilnaw3]!=1))
+                    {
+                       SKLLAN[ilnaw3][PLMIN]=atoi(LAN[ilnaw3].SubString(0,poj_na_zn[ilnaw3][LZN2]-1).c_str());
+                       PLMIN++;
+                    }
+                    if((LAN[ilnaw3][poj_na_zn[ilnaw3][LZN2]]=='+')&&(LZN2>0)&&(LZN2<ILLZN[ilnaw3]))
+                    {
+                       SKLLAN[ilnaw3][PLMIN]=atoi(LAN[ilnaw3].SubString(poj_na_zn[ilnaw3][LZN2-1]+1,poj_na_zn[ilnaw3][LZN2]-poj_na_zn[ilnaw3][LZN2-1]-1).c_str());
+                       PLMIN++;
+
+
+                    }
+                    if((LAN[ilnaw3][poj_na_zn[ilnaw3][LZN2]]=='+')&&(LZN2==ILLZN[ilnaw3]-1))
+                    {
+                       SKLLAN[ilnaw3][PLMIN]=atoi(LAN[ilnaw3].SubString(poj_na_zn[ilnaw3][LZN2]+1,LAN[ilnaw3].Length()-poj_na_zn[ilnaw3][LZN2]).c_str());
+                       PLMIN++;
+
+
+                    }
+
+
+
+                   LZN2++;
+                  }
+                  while(LZN2<ILLZN[ilnaw3]);
+                  if(LZN2==ILLZN[ilnaw3])
+                  {
+                     ILPLMIN[ilnaw3]=PLMIN;
+                     PLMIN=0;
+                     LZN2=0;
+
+                  }
+                 ilnaw3++;
+                }
+                while(ilnaw3<ilnaw2);
+                int SUMYLAN[100];
+                 ilnaw3=0;
+                 int PLMIN2=0;
+                 ShowMessage(DODP[0]);
+                 do
+                 {
+                  do
+                  {
+                    SUMYLAN[ilnaw3]=SUMYLAN[ilnaw3]+ SKLLAN[ilnaw3][PLMIN2];
+
+                    PLMIN2++;
+                   }
+                   while(PLMIN2<ILPLMIN[ilnaw3]);
+                   if(PLMIN2==ILPLMIN[ilnaw3])
+                   {
+                     PLMIN2=0;
+
+                   }
+                   ilnaw3++;
+                 }
+                 while(ilnaw3<ilnaw2);
+                 ilnaw3=0;
+                 int SUMAMNOZEN=0;
+                 do
+                 {
+                  if(ilnaw3==0)
+                  {
+                  SUMAMNOZEN=SUMYLAN[ilnaw3]+DODP[ilnaw3];
+
+                  }
+                  else
+                  {
+                    SUMAMNOZEN=SUMAMNOZEN*(SUMYLAN[ilnaw3]+DODP[ilnaw3]);
+
+                  }
+
+
+
+                  ilnaw3++;
+                 }
+                 while(ilnaw3<ilnaw2);
+
+                  ShowMessage(SUMAMNOZEN);
+
+                     int POJ_NA_ZN[100];
+                     int iterator_lankon=1;
+                     int Znaki=0;
+                     do
+                     {
+
+                       if(LANKON[iterator_lankon]=='+')
+                       {
+                          POJ_NA_ZN[Znaki]=iterator_lankon;
+                          Znaki++;
+                       }
+                       if(LANKON[iterator_lankon]=='-')
+                       {
+                          POJ_NA_ZN[Znaki]=iterator_lankon;
+                          Znaki++;
+                       }
+                       if(LANKON[iterator_lankon]=='*')
+                       {
+                          POJ_NA_ZN[Znaki]=iterator_lankon;
+                          Znaki++;
+
+                       }
+                       if(LANKON[iterator_lankon]=='/')
+                       {
+                          POJ_NA_ZN[Znaki]=iterator_lankon;
+                          Znaki++;
+
+                       }
+
+
+                      iterator_lankon++;
+                     }
+                     while(iterator_lankon<LANKON.Length());
+                     int Znaki2=0;
+                     int SKLAD[100];
+                     do
+                     {
+                       if((Znaki2==0)&&(LANKON[POJ_NA_ZN[Znaki2]]=='+'))
+                       {
+                         SKLAD[Znaki2]=atoi(LANKON.SubString(0,POJ_NA_ZN[0]-1).c_str());
+
+
+                       }
+                       if((Znaki2<Znaki)&&(Znaki2>0)&&(LANKON[POJ_NA_ZN[Znaki2]]=='+'))
+                       {
+                         SKLAD[Znaki2]=atoi(LANKON.SubString(POJ_NA_ZN[Znaki2-1]+1,POJ_NA_ZN[Znaki2]-POJ_NA_ZN[Znaki2-1]-1).c_str());
+
+
+                       }
+                       if((Znaki2==Znaki-1)&&(LANKON[POJ_NA_ZN[Znaki2]]=='+'))
+                       {
+                         SKLAD[Znaki2]=atoi(LANKON.SubString(POJ_NA_ZN[Znaki2]+1,LANKON.Length()-POJ_NA_ZN[Znaki2]).c_str());
+
+
+                       }
+
+
+
+
+
+
+
+                      Znaki2++;
+                     }
+                     while(Znaki2<Znaki);
+                      int SUMANAPDOD=0;
+                      Znaki2=0;
+                      do
+                      {
+                       SUMANAPDOD=SUMANAPDOD+SKLAD[Znaki2];
+
+
+                      Znaki2++;
+                      }
+                      while(Znaki2<Znaki);
+
+                      ShowMessage((SUMANAPDOD+SUMAMNOZEN)*SUMAMNOZ);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                    int naw2=0;
                    int czuj1=0;
                    int czuj2=0;
                    int Czuj1=0;
                    int Czuj2=0;
-                   int poz1=0;
-                   int poz2=0;
+                    poz1=0;
+                    poz2=0;
                    AnsiString LANCUCHYDOD[100];
                    AnsiString LANCUCHR[100];
                    int illanc=0;
@@ -695,7 +1324,7 @@ int il_nap2=0;
                      while(LICZBA_ZNAKOWLAN2<liczba_znakowil[ilosclandod2]);
                      if(LICZBA_ZNAKOWLAN2==liczba_znakowil[ilosclandod2])
                      {
-                        ShowMessage(SUMY4[ilosclandod2]+DODSUM[ilosclandod2]);
+                     //   ShowMessage(SUMY4[ilosclandod2]+DODSUM[ilosclandod2]);
                         LICZBA_ZNAKOWLAN2=0;
                      }
                      ilosclandod2++;
@@ -902,7 +1531,7 @@ int il_nap2=0;
                           {
 
                               SUMY2[IL2][ilpoz2]=SUMY3[POZ[IL2][ilpoz2]];
-                                 ShowMessage(SUMY2[IL2][ilpoz2]);
+                            //     ShowMessage(SUMY2[IL2][ilpoz2]);
                             ilpoz2++;
                           }
                           while(ilpoz2<=poj_il_Poz[IL2]);
@@ -919,8 +1548,8 @@ int il_nap2=0;
                       ilpoz2=0;
                       IL2=0;
                       int IL3=0;
-                      ShowMessage(poj_il_Poz[0]);
-                      ShowMessage(poj_il_Poz[1]);
+                   //   ShowMessage(poj_il_Poz[0]);
+                 //     ShowMessage(poj_il_Poz[1]);
                       do
                       {
                     do
@@ -946,8 +1575,8 @@ int il_nap2=0;
                     IL2++;
                     }
                     while(IL2<=IL);
-                     ShowMessage(SUMYM[0]);
-                     ShowMessage(SUMYM[1]);
+                //     ShowMessage(SUMYM[0]);
+                //     ShowMessage(SUMYM[1]);
                      int SUMYMISKL=0;
                      IL2=0;
                      do
@@ -964,7 +1593,7 @@ int il_nap2=0;
                      IL2++;
                      }
                      while(IL2<IL);
-                          ShowMessage(SUMYMISKL);
+                 //         ShowMessage(SUMYMISKL);
                     }
                       illanc=0;
                     }
@@ -1071,7 +1700,10 @@ int il_nap2=0;
                          ShowMessage(SUMAGW);
                          int iterator_length=1;
                          int Poj_na_zn[100];
+                         AnsiString minusnaw[200];
                          int il_zn=0;
+                         int poj_na_min_naw[200];
+                         int ilmin=0;
                          do
                          {
                            if(NAPISPOJ[iterator_length]=='+')
@@ -1083,6 +1715,15 @@ int il_nap2=0;
                            {
                                Poj_na_zn[il_zn]=iterator_length;
                                il_zn++;
+                           }
+                           if(iterator_length<NAPISPOJ.Length()-1)
+                           {
+                           if((NAPISPOJ[iterator_length]=='-')&&(NAPISPOJ[iterator_length+1]=='('))
+                           {
+                              poj_na_min_naw[ilmin]=iterator_length+1;
+                              ilmin++;
+
+                           }
                            }
                              if(NAPISPOJ[iterator_length]=='/')
                            {
@@ -1097,6 +1738,15 @@ int il_nap2=0;
                           iterator_length++;
                          }
                          while(iterator_length<NAPISPOJ.Length());
+                         int il_min2=0;
+                         do
+                         {
+                           minusnaw[il_min2]=NAPISPOJ.SubString(poj_na_min_naw[il_min2]+1,poj_na_min_naw[il_min2+1]-poj_na_min_naw[il_min2]-1);
+                           ShowMessage(minusnaw[il_min2]);
+
+                          il_min2++;
+                         }
+                         while(il_min2<ilmin);
                               int iterator_NAPIS=1;
                               int il_nap2=0;
                               int Nalez=0;
@@ -1267,11 +1917,11 @@ int il_nap2=0;
                          while(ilplmin2<ilplmin);
                          if(SUMAMNOZE!=0)
                          {
-                         ShowMessage((SUMA+DODSUM)*SUMAMNOZE);
+                    //     ShowMessage((SUMA+DODSUM)*SUMAMNOZE);
                          }
                          else
                          {
-                          ShowMessage(SUMA+DODSUM);
+                     //     ShowMessage(SUMA+DODSUM);
                          }
                   }
                   else
@@ -1351,7 +2001,7 @@ int il_nap2=0;
                     }
                     while(il_skl2<ilskl);
                     }
-                    ShowMessage(SUMAGW);
+                  //  ShowMessage(SUMAGW);
                     int il_nap2=0;
                     int iterator_NAPIS=1;
                     AnsiString MNOZ[100];
@@ -1402,8 +2052,8 @@ int il_nap2=0;
                 iteratornaw2=0;
 
 
-     AnsiString napisywb[300];
-     int sumamnozidz[200];
+     AnsiString napisywb[100];
+     int sumamnozidz[100];
      do
      {
         sumamnidz[iteratornaw2][iterator_sumidz]=1;
@@ -1431,6 +2081,8 @@ int il_nap2=0;
 
      do
      {
+     if(iteratornaw2<iteratornaw3)
+     {
      if(lancuchy[iteratornaw2][iterator_dlugosc]=='*')
      {
           pojemnik_na_znaki[iteratornaw2][liczba_znakow]=iterator_dlugosc;
@@ -1455,9 +2107,11 @@ int il_nap2=0;
      {
 
      }
+     }
      iterator_dlugosc++;
      }
      while(iterator_dlugosc<lancuchy[iteratornaw2].Length());
+
      if(iterator_dlugosc==lancuchy[iteratornaw2].Length())
      {
      IL_ZN[iteratornaw2]=liczba_znakow;
@@ -1471,7 +2125,10 @@ int il_nap2=0;
      int liczba_znakow2=0;
      iteratornaw2=0;
      int iteratorGWD=1;
+
      do
+     {
+      if(IL_ZN[iteratornaw2]!=0)
      {
      do
      {
@@ -1491,7 +2148,7 @@ int il_nap2=0;
          ShowMessage(sumamnidz[iteratornaw2][iteratorgdz2]);
      }
      }
-     if(liczba_znakow2>1)
+     if(liczba_znakow2>0)
      {
      if((iteratorGWD==1)&&(lancuchy[iteratornaw2][pojemnik_na_znaki[iteratornaw2][liczba_znakow2]]=='/')&&(lancuchy[iteratornaw2][pojemnik_na_znaki[iteratornaw2][liczba_znakow2-1]]!='*')&&(lancuchy[iteratornaw2][pojemnik_na_znaki[iteratornaw2][liczba_znakow2-1]]!='/'))
      {
@@ -1535,6 +2192,7 @@ int il_nap2=0;
      liczba_znakow2++;
      }
      while(liczba_znakow2<IL_ZN[iteratornaw2]);
+     }
      if(liczba_znakow2==IL_ZN[iteratornaw2])
      {
      if(liczba_znakow2>0)
@@ -1617,9 +2275,9 @@ int il_nap2=0;
 
 
 
-      ShowMessage("GOGO");
+   //   ShowMessage("GOGO");
          int iterator_napisponaw=1;
-         int pojEM_na_znaki[200];
+         int pojEM_na_znaki[100];
          int liczba_Znak=0;
          do
          {
@@ -1655,7 +2313,7 @@ int il_nap2=0;
          }
          while(iterator_napisponaw<napisponaw.Length());
          int liczba_Znak2=0;
-         int SKL[200];
+         int SKL[100];
          int Ilplmin=0;
 
          do
@@ -1703,7 +2361,7 @@ int il_nap2=0;
          Ilplmin2++;
         }
         while(Ilplmin2<Ilplmin);
-        ShowMessage(Suma_skl);
+   //     ShowMessage(Suma_skl);
 
 
 
@@ -1735,6 +2393,7 @@ int il_nap2=0;
    {
                    if(IL_ZN[drugiiteratornaw2]!=0)
                  {
+
                  do
                  {
 
@@ -1745,16 +2404,16 @@ int il_nap2=0;
                      sumy[drugiiteratornaw2]=sumy[drugiiteratornaw2]+atof(lancuchy[drugiiteratornaw2].SubString(0,pojemnik_na_znaki[drugiiteratornaw2][0]-1).c_str());
                  }
                  }
-                 if(liczba_znakowEX< IL_ZN[drugiiteratornaw2])
+                 if(liczba_znakowEX< IL_ZN[drugiiteratornaw2]-1)
                  {
-                 if ((liczba_znakowEX==1)&&(lancuchy[drugiiteratornaw2][pojemnik_na_znaki[drugiiteratornaw2][liczba_znakowEX+1]]!='/')&&(lancuchy[drugiiteratornaw2][pojemnik_na_znaki[drugiiteratornaw2][liczba_znakowEX+1]]!='*'))
+                 if ((IL_ZN[drugiiteratornaw2]!=1)&&(liczba_znakowEX==0)&&(lancuchy[drugiiteratornaw2][pojemnik_na_znaki[drugiiteratornaw2][liczba_znakowEX+1]]!='/')&&(lancuchy[drugiiteratornaw2][pojemnik_na_znaki[drugiiteratornaw2][liczba_znakowEX+1]]!='*'))
                  {
-                    DODSUMA[drugiiteratornaw2]=atof(lancuchy[drugiiteratornaw2].SubString(pojemnik_na_znaki[drugiiteratornaw2][1]+1,pojemnik_na_znaki[drugiiteratornaw2][2]-pojemnik_na_znaki[drugiiteratornaw2][1]-1).c_str());
+                    DODSUMA[drugiiteratornaw2]=atof(lancuchy[drugiiteratornaw2].SubString(pojemnik_na_znaki[drugiiteratornaw2][0]+1,pojemnik_na_znaki[drugiiteratornaw2][1]-pojemnik_na_znaki[drugiiteratornaw2][0]-1).c_str());
                  }
                  }
-                 if(liczba_znakowEX< IL_ZN[drugiiteratornaw2])
+                 if(liczba_znakowEX< IL_ZN[drugiiteratornaw2]-1)
                  {
-                 if((liczba_znakowEX>1)&&(lancuchy[drugiiteratornaw2][pojemnik_na_znaki[drugiiteratornaw2][liczba_znakowEX]]=='+')&&(lancuchy[drugiiteratornaw2][pojemnik_na_znaki[drugiiteratornaw2][liczba_znakowEX+1]]!='*')&&(lancuchy[drugiiteratornaw2][pojemnik_na_znaki[drugiiteratornaw2][liczba_znakowEX+1]]!='/'))
+                 if((liczba_znakowEX>0)&&(lancuchy[drugiiteratornaw2][pojemnik_na_znaki[drugiiteratornaw2][liczba_znakowEX]]=='+')&&(lancuchy[drugiiteratornaw2][pojemnik_na_znaki[drugiiteratornaw2][liczba_znakowEX+1]]!='*')&&(lancuchy[drugiiteratornaw2][pojemnik_na_znaki[drugiiteratornaw2][liczba_znakowEX+1]]!='/'))
                  {
                      sumy[drugiiteratornaw2]=sumy[drugiiteratornaw2]+atof(lancuchy[drugiiteratornaw2].SubString(pojemnik_na_znaki[drugiiteratornaw2][liczba_znakowEX]+1,pojemnik_na_znaki[drugiiteratornaw2][liczba_znakowEX+1]-pojemnik_na_znaki[drugiiteratornaw2][liczba_znakowEX]).c_str());
                  }
@@ -1762,10 +2421,10 @@ int il_nap2=0;
 
                  if(lancuchy[drugiiteratornaw2][pojemnik_na_znaki[drugiiteratornaw2][liczba_znakowEX]]=='+')
                  {
-                      sumy[drugiiteratornaw2]=sumy[drugiiteratornaw2]+atof(lancuchy[drugiiteratornaw2].SubString(pojemnik_na_znaki[drugiiteratornaw2][poj_na_znaki[drugiiteratornaw2]]+1,lancuchy[drugiiteratornaw2].Length()-pojemnik_na_znaki[drugiiteratornaw2][poj_na_znaki[drugiiteratornaw2]]).c_str());
+                //      sumy[drugiiteratornaw2]=sumy[drugiiteratornaw2]+atof(lancuchy[drugiiteratornaw2].SubString(pojemnik_na_znaki[drugiiteratornaw2][poj_na_znaki[drugiiteratornaw2]]+1,lancuchy[drugiiteratornaw2].Length()-pojemnik_na_znaki[drugiiteratornaw2][poj_na_znaki[drugiiteratornaw2]]).c_str());
                  }
 
-                    LENGTH[drugiiteratornaw2]=atof(lancuchy[drugiiteratornaw2].SubString(pojemnik_na_znaki[drugiiteratornaw2][poj_na_znaki[drugiiteratornaw2]-1]+1,lancuchy[drugiiteratornaw2].Length()-pojemnik_na_znaki[drugiiteratornaw2][poj_na_znaki[drugiiteratornaw2]-1]).c_str());
+                   LENGTH[drugiiteratornaw2]=atof(lancuchy[drugiiteratornaw2].SubString(pojemnik_na_znaki[drugiiteratornaw2][poj_na_znaki[drugiiteratornaw2]-1]+1,lancuchy[drugiiteratornaw2].Length()-pojemnik_na_znaki[drugiiteratornaw2][poj_na_znaki[drugiiteratornaw2]-1]).c_str());
 
 
                  if(liczba_znakowEX< IL_ZN[drugiiteratornaw2]-1)
@@ -1798,8 +2457,10 @@ int il_nap2=0;
                  {
                  liczba_znakowEX=0;
                  }
+                 if(IL_ZN[drugiiteratornaw2]!=0)
+                 {
                  sumy_nawiasow[drugiiteratornaw2]=sumy[drugiiteratornaw2]+sumy_mnozenia_i_dzielenia[drugiiteratornaw2]+DODSUMA[drugiiteratornaw2]+LENGTH[drugiiteratornaw2];
-
+                 }
 
                  drugiiteratornaw2++;
    }
@@ -1947,7 +2608,7 @@ int il_nap2=0;
      iteratornaw2=0;
      AnsiString poj_nagid[100][100];
      iterator_dlugosc=1;
-     int poj_na_od[300][100];
+     int poj_na_od[100][100];
      int poj_na_znaki[200];
      int iteratorgp=1;
      int iteratorgd=1;
@@ -1957,7 +2618,7 @@ int il_nap2=0;
      int iteratorgdz2=1;
      int iterator_sumidz=1;
      int sumamnidz[100][100];
-     AnsiString napisywb[300];
+     AnsiString napisywb[100];
      int sumamnozidz[200];
      do
      {
@@ -1977,6 +2638,8 @@ int il_nap2=0;
          iteratorop++;
      }
      while(iteratorop<=200);
+        if(IL_ZN[iteratornaw2]!=0)
+     {
      do
      {
      do
@@ -2010,6 +2673,7 @@ int il_nap2=0;
      while(iterator_dlugosc<lancuchy[iteratornaw2].Length());
      int liczba_znakow2=1;
      int iteratorGWD=1;
+
      do
      {
      if((iteratorgdz2==1)&&(lancuchy[iteratornaw2][pojemnik_na_znaki[iteratornaw2][liczba_znakow2]]=='*')&&(iteratorGWD==1))
@@ -2084,6 +2748,7 @@ int il_nap2=0;
      iteratornaw2++;
    }
    while(iteratornaw2<iteratornaw3);
+    }
    iteratornaw2=1;
    iterator_dlugosc=1;
    int liczba_znakowite=1;
@@ -2096,6 +2761,8 @@ int il_nap2=0;
    int liczba_znakowEX=0;
    int LENGTH[200];
    do
+   {
+   if(IL_ZN[drugiiteratornaw2]!=0)
    {
                  do
                  {
@@ -2149,12 +2816,22 @@ int il_nap2=0;
                  liczba_znakowEX++;
                  }
                  while(liczba_znakowEX<poj_na_znaki[drugiiteratornaw2]);
+                 }
+                 if(IL_ZN[drugiiteratornaw2]==0)
+                 {
+                    sumy_nawiasow[drugiiteratornaw2]=atoi(lancuchy[drugiiteratornaw2].c_str());
+
+                 }
+                 else
+                 {
+                          sumy_nawiasow[drugiiteratornaw2]=sumy[drugiiteratornaw2]+sumy_mnozenia_i_dzielenia[drugiiteratornaw2]+DODSUMA[drugiiteratornaw2]+LENGTH[drugiiteratornaw2];
+                 }
                  if(liczba_znakowEX==poj_na_znaki[drugiiteratornaw2])
                  {
                  liczba_znakowEX=0;
                  }
-                 sumy_nawiasow[drugiiteratornaw2]=sumy[drugiiteratornaw2]+sumy_mnozenia_i_dzielenia[drugiiteratornaw2]+DODSUMA[drugiiteratornaw2]+LENGTH[drugiiteratornaw2]+444;
-                 ShowMessage(sumy[drugiiteratornaw2]+sumy_mnozenia_i_dzielenia[drugiiteratornaw2]);
+
+
                  drugiiteratornaw2++;
    }
    while(drugiiteratornaw2<iteratornaw2);
@@ -2223,36 +2900,36 @@ int il_nap2=0;
    }
    if((Edit1->Text[1]=='|')&&(Edit1->Text[Edit1->Text.Length()]=='|'))
    {
-        ShowMessage(abs(sumawsz));
+   //     ShowMessage(abs(sumawsz));
    }
    else
    {
-   ShowMessage(SUMAGW);
+  // ShowMessage(SUMAGW);
    if(SUMAGW==0)
    {
    if(Edit1->Text[1]!='-')
    {
-         ShowMessage(AnsiString(sumawsz+suma));
+  //       ShowMessage(AnsiString(sumawsz+suma));
    }
    else
    {
-         ShowMessage(AnsiString((-1)*sumawsz));
+  //       ShowMessage(AnsiString((-1)*sumawsz));
    }
    }
    else
    {
-       ShowMessage(sumawsz*SUMAGW);
+ //      ShowMessage(sumawsz*SUMAGW);
    }
    }
    if((Edit1->Text[2]=='|')&&(Edit1->Text[iteratorwb]=='|'))
    {
-        ShowMessage(abs(sumawsz));
+   //     ShowMessage(abs(sumawsz));
    }
    }
    }
    }
 
-   ShowMessage(sumawsz);
+ //  ShowMessage(sumawsz);
    sumy_nawiasow[0]=0;
    sumy_nawiasow[1]=0;
    sumy_nawiasow[2]=0;
@@ -2270,306 +2947,6 @@ int il_nap2=0;
    sumy[3]=0;
    sumy[4]=0;
    sumy[5]=0;
-   }
-
-  
-//---------------------------------------------------------------------------
-
-void __fastcall TForm2::Button2Click(TObject *Sender)
-{
-
-if(Edit3->Text!="")
-{
-int poj_na_xip[200];
-int x1=0;
-       int pozx2;
-int x2=0;
-int c;
-      int liczbaprzyx=0;
-  if(Edit2->Text!="")
-  {
-
-     int ilosckw=0;
-     int lengthedit3=1;
-     int liczba_znakow=0;
-     int poznawmin[200];
-     int liczbaznnawmin=0;
-     do
-     {
-       if(Edit2->Text[lengthedit3]=='+')
-       {
-
-        liczba_znakow++;
-       }
-       if(Edit2->Text[lengthedit3]=='-')
-       {
-           poznawmin[liczbaznnawmin]=lengthedit3;
-           liczbaznnawmin++;
-       }
-         if(Edit2->Text[lengthedit3]=='(')
-       {
-           poznawmin[liczbaznnawmin]=lengthedit3;
-           liczbaznnawmin++;
-       }
-       if(Edit2->Text[lengthedit3]=='x')
-       {
-
-        liczba_znakow++;
-       }
-      lengthedit3++;
-     }
-     while(lengthedit3<Edit2->Text.Length());
-
-          int liczba_znakminnaw=0;
-          int lm=0;
-          do
-          {
-          if(liczba_znakminnaw<liczbaznnawmin-1)
-          {
-             if((Edit2->Text[poznawmin[liczba_znakminnaw]]=='-')&&(Edit2->Text[poznawmin[liczba_znakminnaw+1]]=='('))
-             {
-                lm++;
-
-             }
-             }
-
-
-           liczba_znakminnaw++;
-          }
-          while(liczba_znakminnaw<liczbaznnawmin);
-          int lm2=0;
-          int poj_na_naw[100];
-          int ilnaw=0;
-
-          do
-          {
-            if(Edit2->Text[Edit2->Text.Length()-lm2]==')')
-            {
-              ilnaw++;
-            }
-
-            lm2++;
-          }
-          while(lm2<lm);
-
-          if((ilnaw%2==0)&&(ilnaw==lm))
-          {
-           ShowMessage(Edit2->Text.SubString(poznawmin[lm],Edit2->Text.Length()-lm2-poznawmin[lm2]+1));
-
-          }
-          if(ilnaw%2==1)
-          {
-          int naplength=1;
-          int pozplmin[100];
-          int ilpl=0;
-             do
-             {
-               if(Edit2->Text[naplength]=='+')
-               {
-                 pozplmin[ilpl]=naplength;
-                 ilpl++;
-               }
-               if(Edit2->Text[naplength]=='-')
-               {
-
-               }
-
-
-
-
-
-             naplength++;
-             }
-             while(naplength<Edit2->Text.Length());
-             int ilpl2=0;
-             String NAPIS=Edit2->Text;
-
-
-
-
-          }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    int iterator_napis=1;
-    int POJ_naxip[100];
-    int liczba_znak=0;
-    int pozx=0;
-    do
-    {
-      if(Edit2->Text[iterator_napis]=='x')
-      {
-        POJ_naxip[liczba_znak]=iterator_napis;
-        liczba_znak++;
-
-      }
-      if(iterator_napis<Edit2->Text.Length()-1)
-      {
-      if((Edit2->Text[iterator_napis]=='x')&&(Edit2->Text[iterator_napis+1]=='^')&&(Edit2->Text[iterator_napis+2]=='2'))
-      {
-        pozx=iterator_napis;
-        ilosckw++;
-      }
-      }
-       if(Edit2->Text[iterator_napis]=='+')
-      {
-         POJ_naxip[liczba_znak]=iterator_napis;
-         liczba_znak++;
-
-      }
-
-
-
-
-     iterator_napis++;
-    }
-    while(iterator_napis<=Edit2->Text.Length());
-     int pozx2=atoi(Edit2->Text.SubString(0,pozx-1).c_str());
-    if((ilosckw!=0)&&(Edit2->Text[Edit2->Text.Length()]==Edit2->Text[POJ_naxip[liczba_znak-1]])&&(Edit3->Text=="0"))
-    {
-    int liczba_znak2dod=0;
-
-        do
-        {
-         if((Edit2->Text[POJ_naxip[liczba_znak2dod]]=='+')&&(Edit2->Text[POJ_naxip[liczba_znak2dod+1]]=='x'))
-         {
-            liczbaprzyx=atoi(Edit2->Text.SubString(POJ_naxip[liczba_znak2dod]+1,POJ_naxip[liczba_znak2dod+1]-POJ_naxip[liczba_znak2dod]-1).c_str());
-
-         }
-
-
-
-
-
-         liczba_znak2dod++;
-        }
-        while(liczba_znak2dod<liczba_znak);
-
-
-     //   ShowMessage(atoi(Edit2->Text.SubString(0,pozx-1).c_str()));
-
-           
-      if(pozx2%liczbaprzyx==0)
-        {
-     //      ShowMessage("X nalezy od (-inf,0) U do ("+AnsiString((pozx2)/(liczbaprzyx))+",+inf)");
-
-        }
-
-
-
-
-
-
-
-    }
-    int sklprzyx=0;
-     if(ilosckw==0)
-     {
-       sklprzyx=atoi(Edit2->Text.SubString(0,POJ_naxip[0]-1).c_str());
-       ShowMessage(sklprzyx);
-
-           c=atoi(Edit2->Text.SubString(POJ_naxip[liczba_znak-1]+1,Edit2->Text.Length()-POJ_naxip[liczba_znak-1]).c_str());
-     //     ShowMessage(c);
-    //      ShowMessage("x>"+AnsiString((atoi(Edit3->Text.c_str())-c))/sklprzyx);
-     }
-
-        int liczba_znak2=0;
-    int b=0;
-    if(ilosckw!=0)
-    {
-    do
-    {
-     if(liczba_znak2<liczba_znak-1)
-     {
-     if((Edit2->Text[POJ_naxip[liczba_znak2]]=='+')&&(Edit2->Text[POJ_naxip[liczba_znak2+1]]=='x'))
-     {
-       b=atoi(Edit2->Text.SubString(POJ_naxip[liczba_znak2]+1,POJ_naxip[liczba_znak2+1]-POJ_naxip[liczba_znak2]-1).c_str());
-
-
-     }
-      }
-
-
-
-    liczba_znak2++;
-    }
-    while(liczba_znak2<liczba_znak);
-    int a;
-
-
-
-
-
-
-
-
-
-
-
-    if(ilosckw!=0)
-    {
-    if(Edit2->Text[1]=='x')
-    {
-        a=1;
-    }
-    else
-    {
-     a=atoi(Edit2->Text.SubString(0,pozx-1).c_str());
-    }
-    }
-
-  //  ShowMessage(a);
-  //  ShowMessage(b);
-    if(ilosckw!=0)
-    {
-    if((liczba_znakow==0)&&(atoi(Edit3->Text.c_str())==0))
-    {
-         c=atoi(Edit2->Text.SubString(POJ_naxip[liczba_znak2-1]+1,Edit2->Text.Length()-POJ_naxip[liczba_znak2-1]).c_str());
-
-    }
-    else
-    {
-          c=atoi(Edit2->Text.SubString(POJ_naxip[liczba_znak2-1]+1,Edit2->Text.Length()-POJ_naxip[liczba_znak2-1]).c_str())-atoi(Edit3->Text.c_str());
-    }
-    if(pow(b,2)-4*a*c>0)
-    {
-     x1=((-1)*(b)-sqrt(pow(b,2)-4*a*c))/2*a;
-    x2=((-1)*(b)+sqrt(pow(b,2)-4*a*c))/2*a;
-    }
-    if(pow(b,2)-4*a*c==0)
-    {
-  
-    }
-    }
-//    ShowMessage(x1);
- //   ShowMessage(x2);
-
-
-  }
-  }
-  else
-  {
-    ShowMessage("Wpisz wyrazenie po prawej stronie");
-
-  }
-
-
-
-
-
-   }
-  }
-
+}
 //---------------------------------------------------------------------------
 

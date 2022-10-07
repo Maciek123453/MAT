@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 388
-  Top = 154
+  Left = 192
+  Top = 125
   Width = 1305
   Height = 675
   Caption = 'Form1'
@@ -14,9 +14,9 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 13
   object Button1: TButton
-    Left = 568
-    Top = 144
-    Width = 155
+    Left = 552
+    Top = 104
+    Width = 209
     Height = 25
     Caption = 'Rownania i nierownosci'
     TabOrder = 0
