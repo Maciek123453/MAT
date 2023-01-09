@@ -1,40 +1,46 @@
 //---------------------------------------------------------------------------
 
-#ifndef Unit2H
-#define Unit2H
+#ifndef Unit4H
+#define Unit4H
 //---------------------------------------------------------------------------
 #include <Classes.hpp>
 #include <Controls.hpp>
 #include <StdCtrls.hpp>
 #include <Forms.hpp>
 //---------------------------------------------------------------------------
-class TForm2 : public TForm
+class TForm4 : public TForm
 {
 __published:	// IDE-managed Components
-        TButton *Button1;
         TEdit *Edit1;
+        TButton *Button1;
         TButton *Button2;
-        TEdit *Edit2;
-        TLabel *Label1;
-        TEdit *Edit3;
-        TButton *Row;
-        TMemo *Pisz;
-        TEdit *Edit4;
-        TLabel *Label2;
-        TEdit *Edit5;
         TButton *Button3;
+        TEdit *Edit2;
+        TEdit *Edit3;
+        TLabel *Label1;
+        TLabel *Label2;
         TLabel *Label3;
-        TEdit *Edit6;
-        TEdit *Edit7;
+        TLabel *ALFA;
+        TLabel *Label4;
+        TLabel *Label5;
         TButton *Button4;
         TButton *Button5;
-        void __fastcall Button1Click(TObject *Sender);
-        void __fastcall Button2Click(TObject *Sender);
+        TButton *Button6;
+        TButton *Button7;
+        TButton *Button8;
+        TButton *Button9;
+        TButton *Button10;
+        TLabel *Label6;
+        TLabel *Label7;
+        TLabel *Label8;
+        TEdit *Edit4;
+        TEdit *Edit5;
+        TLabel *Label9;
 private:	// User declarations
 public:		// User declarations
-        __fastcall TForm2(TComponent* Owner);
+        __fastcall TForm4(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
-extern PACKAGE TForm2 *Form2;
+extern PACKAGE TForm4 *Form4;
 //---------------------------------------------------------------------------
 #endif
